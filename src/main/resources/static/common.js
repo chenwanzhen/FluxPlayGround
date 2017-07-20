@@ -1,6 +1,6 @@
 function addEvent(event, elem, fuc) {
-    if (elem.addEventListener())
-        elem.addEventListener(event, fuc, false)
+    if (elem.addEventListener)
+        elem.addEventListener(event, fuc, false);
     else if (elem.attachEvent())
         elem.attachEvent("on" + event, fuc);
     else
