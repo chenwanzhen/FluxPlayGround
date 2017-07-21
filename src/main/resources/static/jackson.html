@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jackson</title>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <script type="text/javascript" src="/file?name=common.js"></script>
+</head>
+<body>
+<p>
+    <button id="jsonview">JsonView</button>
+    <button id="jsonview-with-mono">JsonViwe with Mono</button>
+</p>
+<p id="output"></p>
+
+<p>
+    <a href="/">返回</a>
+</p>
+
+<script type="text/javascript">
+    addEvent("click", document.getElementById('jsonview'), function () {
+        var req = new XMLHttpRequest();
+        req.open('GET', 'http://' + document.domain + ':8000/jackson/view', false);
+        req.send(null);
+        if (req.status === 200){
+            print("Response received:" + req.responseText);
+        }
+    });
+</script>
+</body>
+</html>
