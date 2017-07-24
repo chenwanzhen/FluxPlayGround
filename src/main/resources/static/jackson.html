@@ -10,6 +10,7 @@
 <p>
     <button id="jsonview">JsonView</button>
     <button id="jsonview-with-mono">JsonViwe with Mono</button>
+    <button id="jsonview-with-flux">JsonView with flux</button>
 </p>
 <p id="output"></p>
 
@@ -18,14 +19,37 @@
 </p>
 
 <script type="text/javascript">
+    
+    function handler() {
+        if (this.status === 200) {
+            print("回执：" + this.responseText)
+        }
+    }
+    
     addEvent("click", document.getElementById('jsonview'), function () {
         var req = new XMLHttpRequest();
-        req.open('GET', 'http://' + document.domain + ':8000/jackson/view', false);
+        req.onload = handler;
+        req.open('GET', 'http://' + document.domain + ':8000/jackson/view', true);
         req.send(null);
-        if (req.status === 200){
-            print("Response received:" + req.responseText);
-        }
     });
+    
+    
+
+    addEvent("click", document.getElementById('jsonview-with-mono'), function() {
+        var req = new XMLHttpRequest();
+        req.onload = handler;
+        req.open('GET', 'http://' + document.domain + ':8000/jackson/view-with-mono', true);
+        req.send(null);
+    });
+
+    addEvent("click", document.getElementById('jsonview-with-flux'), function () {
+        var req = new XMLHttpRequest();
+        req.onload = handler;
+        req.open('GET', 'http://' + document.domain + ':8000/jackson/view-with-flux', true);
+        req.send(null);
+    });
+
+
 </script>
 </body>
 </html>

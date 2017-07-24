@@ -3,6 +3,7 @@ package me.fanwu.controller
 import com.fasterxml.jackson.annotation.JsonView
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 /**
@@ -12,7 +13,7 @@ import reactor.core.publisher.Mono
 class JacksonController {
 
     private final JacksonViewBean jacksonViewBean =
-            new JacksonViewBean("with", "with", "without")
+            new JacksonViewBean("with", "with2", "without")
 
     @GetMapping("/jackson/view")
     @JsonView(MyJacksonView1.class)
@@ -24,6 +25,12 @@ class JacksonController {
     @JsonView(MyJacksonView1.class)
     Mono<JacksonViewBean> viewWithMono() {
         Mono.just(jacksonViewBean)
+    }
+
+    @GetMapping("/jackson/view-with-flux")
+    @JsonView(MyJackssonView2.class)
+    Flux<JacksonViewBean> viewWithFlux() {
+        Flux.just(jacksonViewBean, jacksonViewBean)
     }
 
     private interface MyJacksonView1 {}
