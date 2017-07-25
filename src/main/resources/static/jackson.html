@@ -12,6 +12,8 @@
     <button id="jsonview">JsonView</button>
     <button id="jsonview-with-mono">JsonViwe with Mono</button>
     <button id="jsonview-with-flux">JsonView with flux</button>
+    <button id="jsonview-with-observable">JsonView with observable</button>
+    <button id="jsonview-with-full">JsonView with full</button>
 </p>
 <p id="output"></p>
 
@@ -49,6 +51,22 @@
         req.open('GET', 'http://' + document.domain + ':8000/jackson/view-with-flux', true);
         req.send(null);
     });
+
+    addEvent("click", document.getElementById('jsonview-with-observable'), function () {
+        var req = new XMLHttpRequest();
+        req.onload = handler;
+        req.open('GET', 'http://' + document.domain + ':8000/jackson/view-with-observable', true);
+        req.send(null);
+    });
+
+    addEvent("click", document.getElementById('jsonview-with-full'), function () {
+        var req = new XMLHttpRequest();
+        req.onload = handler;
+        req.open('GET', 'http://' + document.domain + ':8000/jackson/full', true);
+        req.send(null);
+    });
+
+
 
 
 </script>

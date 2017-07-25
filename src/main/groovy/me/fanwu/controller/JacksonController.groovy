@@ -1,6 +1,7 @@
 package me.fanwu.controller
 
 import com.fasterxml.jackson.annotation.JsonView
+import io.reactivex.Observable
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
@@ -31,6 +32,17 @@ class JacksonController {
     @JsonView(MyJackssonView2.class)
     Flux<JacksonViewBean> viewWithFlux() {
         Flux.just(jacksonViewBean, jacksonViewBean)
+    }
+
+    @GetMapping("/jackson/view-with-observable")
+    @JsonView(MyJackssonView2.class)
+    Observable<JacksonViewBean> viewWithObservalbe() {
+        return Observable.just(jacksonViewBean)
+    }
+
+    @GetMapping("/jackson/full")
+    JacksonViewBean full() {
+        return jacksonViewBean
     }
 
     private interface MyJacksonView1 {}
